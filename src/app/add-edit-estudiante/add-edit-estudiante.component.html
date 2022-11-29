@@ -1,0 +1,61 @@
+
+<form #form="ngForm" autocomplete="off" *ngIf="service.formData" (ngSubmit)="onSubmit(form)">
+    <input type="hidden" name="id" #id="ngModel" [(ngModel)]="service.formData.id">
+    <div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label class="font-weight-bold">Nombre</label>
+            <div class="input-group">
+                 <input name="nombre" #nombre="ngModel" [(ngModel)]="service.formData.nombre" class="form-control">        
+            </div>
+           
+            </div>
+            <div class="form-group">
+                <label class="font-weight-bold">Edad</label>
+                <div class="input-group">
+                    <input name="edad" #edad="ngModel" [(ngModel)]="service.formData.edad" class="form-control" >   
+               </div>
+            </div>
+            <div class="form-group">
+                <label class="font-weight-bold">Genero</label>
+                <div class="input-group">
+                    <input name="genero" #genero="ngModel" [(ngModel)]="service.formData.genero" class="form-control" >   
+               </div>
+            </div>
+        </div>
+    </div>
+    <table class="table table-borderless">
+     <thead class="thead-light">
+        <th>Materia</th>
+       <th>Nota</th>
+       <th>Letra</th>
+       <th>
+        <a class="btn btn-sm btn-success text-white" (click)="AddOrEditEstudiante(null, service.formData.id)"><i class="fa fa-plus"></i>Agregar Calificaciones</a>
+       </th>
+     </thead>
+     <tbody>
+        <tr *ngIf="service.EstudianteDetalle.length==0">
+        <td class="font-italic text-center" colspan="5">
+          No hay materias seleccionadas.
+        </td>
+        </tr>
+        <tr *ngFor="let item of service.EstudianteDetalle; let i = index">
+        <td>{{item.materia}}</td>
+        <td>{{item.nota}}</td>
+        <td *ngIf="item.nota >= 90 && item.nota <= 100">A</td>
+        <td *ngIf="item.nota >= 80 && item.nota <= 89">B</td>
+        <td *ngIf="item.nota >= 70 && item.nota <= 79">C</td>
+        <td *ngIf="item.nota >= 0 && item.nota <=  69">F</td>
+        <td>
+            <a class="btn btn-sm btn-info text-white" (click)="AddOrEditEstudiante(i, service.formData.id)"><i class="fa fa-pencil"></i></a>
+            <a class="btn btn-sm btn-danger text-white ml-1" (click)="onDeleteEstudianteDetalle(item.calificacionId, i)"><i class="fa fa-trash"></i></a>
+        </td>
+        </tr>
+     </tbody>
+    </table>
+    <div class="form-group">
+        <button type="submit" class="btn btn-dark"><i class="fa fa-database"></i>Guardar</button>
+        <a class="btn btn-outline-dark ml-1" routerLink="/estudiantes"><i class="fa fa-table"></i>Ver Estudiantes</a>
+    </div>
+    </form>
+    

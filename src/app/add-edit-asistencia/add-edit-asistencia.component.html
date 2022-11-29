@@ -1,0 +1,57 @@
+
+<form #form="ngForm" autocomplete="off" *ngIf="service.formData" (ngSubmit)="onSubmit(form)">
+    <input type="hidden" name="id" #id="ngModel" [(ngModel)]="service.formData.id">
+    <div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label class="font-weight-bold">Fecha</label>
+            <div class="input-group">
+                 <input  type="date" name="fecha" #fecha="ngModel" [(ngModel)]="service.formData.fecha" class="form-control">   
+            </div>
+            </div>
+            <div class="form-group">
+                <label class="font-weight-bold">Presentes</label>
+                <div class="input-group">
+                    <input name="presentes" #presentes="ngModel" [(ngModel)]="service.formData.presentes" class="form-control" readonly>   
+               </div>
+            </div>
+            <div class="form-group">
+                <label class="font-weight-bold">Ausentes</label>
+                <div class="input-group">
+                    <input name="ausentes" #ausentes="ngModel" [(ngModel)]="service.formData.ausentes" class="form-control" readonly>   
+               </div>
+            </div>
+        </div>
+    </div>
+    <table class="table table-borderless">
+     <thead class="thead-light">
+        <th>Estudiante</th>
+       <th>Presencia</th>
+       <th>
+        <a class="btn btn-sm btn-success text-white" (click)="AddOrEditAsistencia(null, service.formData.id)"><i class="fa fa-plus"></i>Agregar Asistencia</a>
+       </th>
+     </thead>
+     <tbody>
+        <tr *ngIf="service.AsistenciaDetalle.length==0">
+        <td class="font-italic text-center" colspan="5">
+          No hay estudiantes seleccionados.
+        </td>
+        </tr>
+        <tr *ngFor="let item of service.AsistenciaDetalle; let i = index">
+        <td>{{item.estudiantenombre}}</td>
+        <td *ngIf="item.presencia">Presente</td>
+        <td *ngIf="!item.presencia">Ausente</td>
+
+        <td>
+            <a class="btn btn-sm btn-info text-white" (click)="AddOrEditAsistencia(i, service.formData.id)"><i class="fa fa-pencil"></i></a>
+            <a class="btn btn-sm btn-danger text-white ml-1" (click)="onDeleteAsistenciaDetalle(item.id, i)"><i class="fa fa-trash"></i></a>
+        </td>
+        </tr>
+     </tbody>
+    </table>
+    <div class="form-group">
+        <button type="submit" class="btn btn-dark"><i class="fa fa-database"></i>Guardar</button>
+        <a class="btn btn-outline-dark ml-1" routerLink="/asistencias"><i class="fa fa-table"></i>Ver Asistencia</a>
+    </div>
+    </form>
+    

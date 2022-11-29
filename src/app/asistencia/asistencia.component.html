@@ -1,0 +1,26 @@
+
+<table class="table table-hover">
+<thead class="thead-light">
+    <th>Fecha</th>
+    <th>Presentes</th>
+    <th>Ausentes</th>
+
+    <th>
+        <a class="btn btn-outline-success" routerLink="/add-edit-asistencia" style="margin:5px;"><i class="fa fa-plus-square"></i>Crear Asistencia</a>
+        <a class="btn btn-outline-info" routerLink="/home" style="margin:5px;"><i class="fa fa-reply"></i> Home</a>
+    </th>
+
+</thead>
+<tbody>
+    <tr *ngFor="let item of asistencialist">  
+        <th (click)="openForEdit(item.id)">{{item.fecha  | date : "dd/MM/y"}}</th>
+        <td (click)="openForEdit(item.id)">{{item.presentes}}</td>
+        <td  (click)="openForEdit(item.id)">{{item.ausentes}}</td>
+        <td>
+            <a class="btn text-danger" (click)="DeleteAsistencia(item.id)"><i class="fa fa-trash fa-lg"></i></a>
+        </td>  
+
+    </tr>
+</tbody>
+
+</table>

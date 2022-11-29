@@ -1,0 +1,35 @@
+<h1 mat-dialog-title>Calificaciones </h1>
+<hr>
+<div mat-dialog-content>
+<form #form="ngForm" autocomplete="off" (ngSubmit)="onSubmit(form)">
+
+    <input type="hidden" name="calificacionId" #calificacionId="ngModel" [(ngModel)]="formData.calificacionId">
+    <input type="hidden" name="estudianteid" #estudianteid="ngModel" [(ngModel)]="formData.estudianteid">
+
+    <div class="form-group">
+   <label>Materias</label>
+   <select class="form-control" name="materia" #materia="ngModel" [(ngModel)]="formData.materia">
+    <option  *ngFor="let item of materiaList">{{item}}</option>
+    </select>
+    </div>
+  <div class="form-row">
+    <div class="form-group" col-md-6>
+        <label>Nota</label>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <input name="nota" #nota="ngModel" [(ngModel)]="formData.nota" class="form-control">
+            </div>
+        </div>
+    </div>
+
+  </div>
+    
+    <div mat-dialog-actions>
+        <button  type="submit"  class="btn btn-dark"><i class="fa fa-database"></i> Agregar</button>
+        <button type="button" class="btn btn-outline-dark ml-1"  [mat-dialog-close]><i class="fa fa-close"></i>Cerrar</button>
+  </div>
+  
+
+</form>
+
+</div>
